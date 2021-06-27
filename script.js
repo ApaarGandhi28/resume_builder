@@ -253,7 +253,7 @@ function CreatePDFfromHTML() {
   $(".resume-div").css("height","135vh");
   var HTML_Width = $(".resume-div").width();
   var HTML_Height = $(".resume-div").height();
-  var top_left_margin = 15;
+  var top_left_margin = 5;
   var PDF_Width = HTML_Width + (top_left_margin * 2);
   var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
   var canvas_image_width = HTML_Width;
@@ -274,5 +274,24 @@ function CreatePDFfromHTML() {
 }
 
 $(".download-button").click(function(e){
+  if($(window).width() < 700){
+    alert("Download not available in Mobile Version");
+    return;
+  }
   CreatePDFfromHTML();
+})
+
+$(document).ready(function(e){
+  if($(window).width() < 900){
+    $(".main-container").empty();
+    $(".download-button").remove();
+    let errDiv = $(`<div style="display:flex; align-items:center";>
+    <div class="box" style="color:red; font-size : 20px ; font-family:Comic Sans Ms; ">
+      Kindly Switch to Desktop to view the page.
+    </div>
+    </div>`);
+    $(".main-container").append(errDiv);
+    alert("Webpage only available in Desktop");
+    return;
+  }
 })
